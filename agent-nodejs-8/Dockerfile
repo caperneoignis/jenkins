@@ -10,7 +10,10 @@ ENV NODEJS_VERSION=8 \
     PROMPT_COMMAND=". /usr/local/bin/scl_enable"
 
 COPY contrib/bin/scl_enable /usr/local/bin/scl_enable
-
+RUN yum -y install wget
+RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm
+RUN yum -y install redhat-lsb libXScrnSaver
+RUN yum -y localinstall google-chrome-stable_current_x86_64.rpm
 # Install NodeJS
 RUN yum install -y centos-release-scl-rh && \
     INSTALL_PKGS="rh-nodejs${NODEJS_VERSION} rh-nodejs${NODEJS_VERSION}-npm rh-nodejs${NODEJS_VERSION}-nodejs-nodemon make gcc-c++" && \
